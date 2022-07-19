@@ -1,0 +1,94 @@
+###Coverletter readme: 
+
+What you need:
+To make the coverletter autofill sheet you need 3 things: 
+1. Completed coverletter template filled out with your own info with the correct codes incorporated so the sheet can read it and automate it. Note: In the end you should have two types of coverletters: one for companies whom you do not know the receiver, and one for companies who you do know the receiver (i.e. a specific name for a recruiter). The link is here:
+https://docs.google.com/document/d/17Hjl7lmeHdFFgkfjslJGPDUpka-wbGFI04XVNtqezSo/edit
+2. A created folder for the coverletters to be placed in (COVERLETTER MASTER sheet also needs to be in this folder, the document created and filled out in #1). Note: the auto-generated coverletters using the code below will also be in this folder for easy organization/deleting after you're done. 
+3. Cover letter template form: the sheet that you put in the companyname/company position and the link it will generate in the column, it should look like this: https://i.imgur.com/NX6Avml.jpg
+
+Follow the steps below:
+Step 1: Use the template provided at the link here: https://docs.google.com/document/d/17Hjl7lmeHdFFgkfjslJGPDUpka-wbGFI04XVNtqezSo/edit
+Step 2: Read the first page and customize it to your liking with keywords associated with your industry, as stated above, you should have two types but you can just use the generic one first and just remember to change the intro if you do know the recruiter's name. Red is the places where you need to fill it out. If you still have red in the doc then you missed something. I would label this doc as COVERLETTER MASTER.
+Step 3: Make the Cover letter template sheet according to this photo: https://i.imgur.com/NX6Avml.jpg
+Should have 5 columns and it should be in that exact order: firstName, lastName, title, companyname, companyposition, Document Link as show in the link. I'm going to label this sheet as 'Coverletter template'
+Step 4: Make a new folder in google docs, place the COVERLETTER MASTER in this folder (the auto-generated coverletters will also be in this folder for easy organization/deletion). I'm just going to label this folder as 'Coverletters'
+Step 5: Copy the code below the row of ### number signs
+Step 6: Save the code, refresh the page and try it out! 
+
+
+tl;dr - Get the link to make the template above, get the url, put it in the code below, make a google doc folder, get the url and put it below too, make a google excel sheet as indicated in the imgur link above, copy the code below the ### hasthtags in with the correct urls for both folder and template above and voila autogenerate your template. If its breaks go below to find how it broke.
+
+---
+Additional info:
+
+Points of fuckery: 
+ - If there is an error check the url within the code of your 'Coverletter template' sheet it might be either the COVERLETTER MASTER url or the COVERLETTER folder url. Make sure to include the '' quote/apostrophe marks encompassing the url, (these are not "" quotation marks)
+ - only copy the code after the bar of ########## below.
+ - There's also notes about the code too above each individual line, but you don't have to worry about it unless you're tweaking it for something else. Just make sure to edit the codes following the 3 ### number signs while including the apostrophes/single quote marks/foot&inches indicator '.
+
+
+Points about the URL:
+### From 'COVERLETTER MASTER' get Google doc code from the URL above. For example: using the template the url is: https://docs.google.com/document/d/17Hjl7lmeHdFFgkfjslJGPDUpka-wbGFI04XVNtqezSo/edit so the code is: 17Hjl7lmeHdFFgkfjslJGPDUpka-wbGFI04XVNtqezSo, after the document/d/xxx and before the '/edit' ending. The two URLs you'll need are: one for the COVERLETTER MASTER doc, and the other for the folder you created and put the COVERLETTER MASTER doc in. It will also create the templates in that folder as well (You can delete the other templates in which it should be named: 'firstname_lastname_Coverletter'. The folder you create will also have a url similar to the document url above and should look similar to this: 
+https://drive.google.com/drive/folders/1VXXXXXXXXXXXXXXXXXXXXXXXXXXGl?ths=true
+ - Use the code following the /folders/xxx and cut it off before the '=true' ending.
+
+
+If following the step by step above this is step 5: Copy the code below into the google sheet 'cover template form' (the one that you write the companyname/companyposition in): Extensions => Apps Script, fill the code parts in where indicated WITH the ['' quotes with the correct urls], save when done and refresh the excel sheet, a new button should appear called 'AutoFill Coverletter', so when you put in the info it will create the doc with the link in the 'Document link column' where you can customize it even more if you want with certain keywords in the job description if you already don't have it.
+
+################################### COPY THE CODE STARTING HERE & EDIT:
+
+function onOpen() {
+  //This create the button on the sheet to execute when you're done inputting the blanks
+  const ui = SpreadsheetApp.getUi();
+  const menu = ui.createMenu('AutoFill Coverletter');
+  menu.addItem('Create New Docs', 'createNewGoogleDocs')
+  menu.addToUi();
+}
+
+
+
+function createNewGoogleDocs() {
+  //This value should be the googledoc id of your Coverletter template that we will use to make the copy
+  const googleDocTemplate = DriveApp.getFileById('###googledoc code from the link###');
+  
+  //This value should be the id of the folder where you want your completed documents stored. If you haven't made a googledrive folder for Coverletters make it and input the googledrive folder id here - KEEP THE '' QUOTES!! edit out the ### tags
+  const destinationFolder = DriveApp.getFolderById('###Make a folder in google docs and get the folder link xxxxxxxx-xxxxxxxxxxxxxxxxxxxxxxxxxxx###')
+  //Here we store the sheet as a variable - no action needed
+  const sheet = SpreadsheetApp
+    .getActiveSpreadsheet()
+    .getSheetByName('Data')
+  
+  //Now we get all of the values as a 2D array - no action needed
+  const rows = sheet.getDataRange().getValues();
+  
+  //Start processing each spreadsheet row - no action needed
+  rows.forEach(function(row, index){
+    //Here we check if this row is the headers, if so we skip it - no action needed
+    if (index === 0) return;
+    //Here we check if a document has already been generated by looking at 'Document Link', if so we skip it - Row[5] should be 'Document Link' this prevents new documents from being made
+    if (row[5]) return;
+    //Using the row data in a template literal, we make a copy of our template document in our destinationFolder - cover letter doc title
+    const copy = googleDocTemplate.makeCopy(`${row[0]}_${row[1]}_Coverletter`, destinationFolder)
+    //Once we have the copy, we then open it using the DocumentApp - no action needed
+    const doc = DocumentApp.openById(copy.getId())
+    //All of the content lives in the body, so we get that for editing - no action needed
+    const body = doc.getBody();
+    
+    //In these lines, we replace our replacement tokens with values from our spreadsheet row - Numbering in rows start from 0. Hence 0, 1, 2, 3, 4, etc. The Red indicates the Cover letter template and the following row[X] code is the google sheet you're replacing the name in.
+    body.replaceText('{{First Name}}', row[0]);
+    body.replaceText('{{Last Name}}', row[1]);
+    body.replaceText('{{companyname}}', row[3]);
+    body.replaceText('{{companyposition}}', row[4]);
+    
+    //We make our changes permanent by saving and closing the document - no action needed
+    doc.saveAndClose();
+    //Store the url of our new document in a variable - no action needed
+    const url = doc.getUrl();
+    //Write that value back to the 'Document Link' column in the spreadsheet.  - no action needed
+    sheet.getRange(index + 1, 6).setValue(url)
+    
+  })
+  
+}
+
