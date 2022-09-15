@@ -27,11 +27,10 @@ Points of fuckery:
  - If there is an error check the url within the code of your 'Coverletter template' sheet it might be either the COVERLETTER MASTER url or the COVERLETTER folder url. Make sure to include the '' quote/apostrophe marks encompassing the url, (these are not "" quotation marks)
  - only copy the code after the bar of ########## below.
  - There's also notes about the code too above each individual line, but you don't have to worry about it unless you're tweaking it for something else. Just make sure to edit the codes following the 3 ### number signs while including the apostrophes/single quote marks/foot&inches indicator '.
- - CHANGE google sheet to 'DATA'
- - keep column 5 to DocumentLink
- - The commands: {{sample}} are case sensitive.
- - folder syntax is fucking weird af too.
- - 
+ - CHANGE google sheet to 'DATA' instead of the default 'Sheet1'
+ - SAVE column 5 for DocumentLink
+ - The commands: {{Sample}} are case sensitive.
+ - folder syntax is fucking weird af too, it might be in a different format than what I have in mine - to debug just create another folder and notice the prefix/suffix codes for the created folders.
 
 Points about the URL:
 ### From 'COVERLETTER MASTER' get Google doc code from the URL above. For example: using the template the url is: https://docs.google.com/document/d/17Hjl7lmeHdFFgkfjslJGPDUpka-wbGFI04XVNtqezSo/edit so the code is: 17Hjl7lmeHdFFgkfjslJGPDUpka-wbGFI04XVNtqezSo, after the document/d/xxx and before the '/edit' ending. The two URLs you'll need are: one for the COVERLETTER MASTER doc, and the other for the folder you created and put the COVERLETTER MASTER doc in. It will also create the templates in that folder as well (You can delete the other templates in which it should be named: 'firstname_lastname_Coverletter'. The folder you create will also have a url similar to the document url above and should look similar to this: 
@@ -42,6 +41,12 @@ https://drive.google.com/drive/folders/1VXXXXXXXXXXXXXXXXXXXXXXXXXXGl?ths=true
 If following the step by step above this is step 5: Copy the code below into the google sheet 'cover template form' (the one that you write the companyname/companyposition in): Extensions => Apps Script, fill the code parts in where indicated WITH the ['' quotes with the correct urls], save when done and refresh the excel sheet, a new button should appear called 'AutoFill Coverletter', so when you put in the info it will create the doc with the link in the 'Document link column' where you can customize it even more if you want with certain keywords in the job description if you already don't have it.
 
 $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+Parts of the sheet to change:
+ 1. First row needs to be changed in according to the body.replaceText{{xx}} parts (CASE SENSITIVE)
+ 2. The default sheet name of 'Sheet1' needs to be changed to 'Data'
+
+
 
 Parts of the codes to change:
 
