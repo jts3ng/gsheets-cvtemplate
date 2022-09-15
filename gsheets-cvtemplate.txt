@@ -45,14 +45,25 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 
 Parts of the codes to change:
 
-Google Drive Folder Link:
+### Google Drive Folder Link:
+  
   const destinationFolder = DriveApp.getFolderById('###Make a folder in google docs and get the folder link xxxxxxxx-xxxxxxxxxxxxxxxxxxxxxxxxxxx###')
 
-Google Doc Coverletter TEMPLATE MASTER
+### Google Doc Coverletter TEMPLATE MASTER
+  
   const googleDocTemplate = DriveApp.getFileById('###googledoc code from the link###');
 
-Title of the file that you will create: rows 0 & 1 and anything within the apostrophes
-    const copy = googleDocTemplate.makeCopy(`${row[0]}_${row[1]}_Coverletter`, destinationFolder)
+### Title of the file that you will create: rows 0 & 1 and anything within the apostrophes
+
+  const copy = googleDocTemplate.makeCopy(`${row[0]}_${row[1]}_Coverletter`, destinationFolder)
+
+### Replacing the texts, you can add more but skip row 5 since that will be the 'DocumentLink' row that is auto-generated from executing the script - Just remember that the first row is Row 0 in computerspeak so it goes Row 0, Row 1, Row 2, etc.
+ - Note it is also case sensitive so if something is not changing and is without errors then it is probably a case sensitive error.
+
+    body.replaceText('{{First Name}}', row[0]);
+    body.replaceText('{{Last Name}}', row[1]);
+    body.replaceText('{{companyname}}', row[3]);
+    body.replaceText('{{companyposition}}', row[4]);
 
 
 ################################### COPY THE CODE STARTING HERE & EDIT:
