@@ -41,6 +41,8 @@ https://drive.google.com/drive/folders/1VXXXXXXXXXXXXXXXXXXXXXXXXXXGl?ths=true
 If following the step by step above this is step 5: Copy the code below into the google sheet 'cover template form' (the one that you write the companyname/companyposition in): Extensions => Apps Script, fill the code parts in where indicated WITH the ['' quotes with the correct urls], save when done and refresh the excel sheet, a new button should appear called 'AutoFill Coverletter', so when you put in the info it will create the doc with the link in the 'Document link column' where you can customize it even more if you want with certain keywords in the job description if you already don't have it.
 
 $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+To use this to autocomplete other things:
+
 
 Parts of the sheet to change:
  1. First row needs to be changed in according to the body.replaceText{{xx}} parts (CASE SENSITIVE)
@@ -53,6 +55,8 @@ Parts of the codes to change:
 ### Google Drive Folder Link:
   
   const destinationFolder = DriveApp.getFolderById('###Make a folder in google docs and get the folder link xxxxxxxx-xxxxxxxxxxxxxxxxxxxxxxxxxxx###')
+
+Google drive default link is: https://drive.google.com/drive/my-drive?ths=true, the suffix of 'my-drive', the [?ths=true] portion shouldn't be used. 
 
 ### Google Doc Coverletter TEMPLATE MASTER
   
